@@ -8,7 +8,9 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+*.html
+*.epub
+*.mobi
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

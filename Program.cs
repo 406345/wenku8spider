@@ -74,11 +74,11 @@ namespace Wenku8Spider
             StringBuilder sb = new StringBuilder();
             foreach (var item in s.imageUrls)
             {
-                var imgBuf = wc.DownloadData(item);
-                string b64 = "data:image/jpeg;base64," + Convert.ToBase64String(imgBuf);
+                // var imgBuf = wc.DownloadData(item);
+                // string b64 = "data:image/jpeg;base64," + Convert.ToBase64String(imgBuf);
 
                 sb.AppendLine("<div>");
-                sb.AppendLine("<img src='" + b64 + "'/>");
+                sb.AppendLine("<img src='" + item + "'/>");
                 sb.AppendLine("</div>");
             }
 
@@ -126,8 +126,9 @@ namespace Wenku8Spider
         static void GenerateHTML(Book b)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<html>");
+            sb.AppendLine("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             sb.AppendLine("<header>");
+            sb.AppendLine("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />");
             sb.AppendLine("<title>");
             sb.AppendLine(b.name);
             sb.AppendLine("</title>");
@@ -149,7 +150,6 @@ namespace Wenku8Spider
 
 
             var curfolder = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
-
             System.IO.File.WriteAllText(curfolder + "/" + b.name + ".html", sb.ToString());
 
         }
