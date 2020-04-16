@@ -36,12 +36,10 @@ namespace Wenku8Spider
     { 
         static string HTTPGet(string url)
         {
-            WebClient c = new WebClient();
-            var encoder = Encoding.GetEncoding("gbk");
-            c.Encoding = encoder;
-            var contentb = c.DownloadData(url);
-            var ub = Encoding.Convert(encoder, Encoding.UTF8, contentb);
-            return Encoding.UTF8.GetString(ub);
+            WebClient c = new WebClient(); 
+            c.Encoding = Encoding.GetEncoding("GBK");;
+            var contentb = c.DownloadString(url);
+            return contentb;
         }
 
         static void ProcessImage(Book book,Section s)
@@ -158,9 +156,10 @@ namespace Wenku8Spider
 
         static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); 
             Book book = new Book();
-            book.url = args[0];
-            var html = book.url;
+            book.url = args[0].Replace("index.htm","");
+            var html = args[0];
 
             var content = HTTPGet(html);
 
